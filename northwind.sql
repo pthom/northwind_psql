@@ -1,4 +1,4 @@
---
+﻿--
 -- PostgreSQL database dump
 --
 
@@ -22,12 +22,30 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
-
-SET search_path = public, pg_catalog;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
+
+---
+--- drop tables
+---
+
+
+DROP TABLE IF EXISTS customercustomerdemo;
+DROP TABLE IF EXISTS customerdemographics;
+DROP TABLE IF EXISTS employeeterritories;
+DROP TABLE IF EXISTS order_details;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS shippers;
+DROP TABLE IF EXISTS suppliers;
+DROP TABLE IF EXISTS territories;
+DROP TABLE IF EXISTS usstates;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS region;
+DROP TABLE IF EXISTS employees;
 
 --
 -- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
@@ -116,14 +134,6 @@ CREATE TABLE employeeterritories (
 );
 
 
---
--- Name: foo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE foo (
-    idx integer NOT NULL,
-    name text
-);
 
 
 --
@@ -199,16 +209,6 @@ CREATE TABLE shippers (
     phone character varying(24)
 );
 
-
---
--- Name: shippers_tmp; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE shippers_tmp (
-    shipperid smallint NOT NULL,
-    companyname character varying(40) NOT NULL,
-    phone character varying(24)
-);
 
 
 --
@@ -445,15 +445,6 @@ INSERT INTO employeeterritories VALUES (9, '48084');
 INSERT INTO employeeterritories VALUES (9, '48304');
 INSERT INTO employeeterritories VALUES (9, '55113');
 INSERT INTO employeeterritories VALUES (9, '55439');
-
-
---
--- Data for Name: foo; Type: TABLE DATA; Schema: public; Owner: -
---
-
-INSERT INTO foo VALUES (1, 'kkmm');
-INSERT INTO foo VALUES (2, 'kkssmm');
-INSERT INTO foo VALUES (3, 'qsfdfs');
 
 
 --
@@ -3558,17 +3549,6 @@ INSERT INTO shippers VALUES (5, 'UPS', '1-800-782-7892');
 INSERT INTO shippers VALUES (6, 'DHL', '1-800-225-5345');
 
 
---
--- Data for Name: shippers_tmp; Type: TABLE DATA; Schema: public; Owner: -
---
-
-INSERT INTO shippers_tmp VALUES (1, 'Speedy Express', '(503) 555-9831');
-INSERT INTO shippers_tmp VALUES (2, 'United Package', '(503) 555-3199');
-INSERT INTO shippers_tmp VALUES (3, 'Federal Shipping', '(503) 555-9931');
-INSERT INTO shippers_tmp VALUES (4, 'Alliance Shippers', '1-800-222-0451');
-INSERT INTO shippers_tmp VALUES (5, 'UPS', '1-800-782-7892');
-INSERT INTO shippers_tmp VALUES (6, 'DHL', '1-800-225-5345');
-
 
 --
 -- Data for Name: suppliers; Type: TABLE DATA; Schema: public; Owner: -
@@ -3722,14 +3702,6 @@ INSERT INTO usstates VALUES (51, 'Wyoming', 'WY', 'west');
 
 
 --
--- Name: foo_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY foo
-    ADD CONSTRAINT foo_pkey PRIMARY KEY (idx);
-
-
---
 -- Name: pk_categories; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3818,14 +3790,6 @@ ALTER TABLE ONLY shippers
 
 
 --
--- Name: pk_shippers_tmp; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY shippers_tmp
-    ADD CONSTRAINT pk_shippers_tmp PRIMARY KEY (shipperid);
-
-
---
 -- Name: pk_suppliers; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3842,15 +3806,109 @@ ALTER TABLE ONLY territories
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: -
+-- Name: fk_orders_customers; Type: Constraint; Schema: -; Owner: -
 --
 
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT fk_orders_customers FOREIGN KEY (customerid) REFERENCES customers;
 
 
+--
+-- Name: fk_orders_employees; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT fk_orders_employees FOREIGN KEY (employeeid) REFERENCES employees;
+
+
+--
+-- Name: fk_orders_shippers; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT fk_orders_shippers FOREIGN KEY (shipvia) REFERENCES shippers;
+
+
+--
+-- Name: fk_order_details_products; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY order_details
+    ADD CONSTRAINT fk_order_details_products FOREIGN KEY (productid) REFERENCES products;
+
+
+--
+-- Name: fk_order_details_orders; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY order_details
+    ADD CONSTRAINT fk_order_details_orders FOREIGN KEY (orderid) REFERENCES orders;
+
+
+--
+-- Name: fk_products_categories; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY products
+    ADD CONSTRAINT fk_products_categories FOREIGN KEY (categoryid) REFERENCES categories;
+
+
+--
+-- Name: fk_products_suppliers; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY products
+    ADD CONSTRAINT fk_products_suppliers FOREIGN KEY (supplierid) REFERENCES suppliers;
+
+
+--
+-- Name: fk_territories_region; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY territories
+    ADD CONSTRAINT fk_territories_region FOREIGN KEY (regionid) REFERENCES region;
+
+
+--
+-- Name: fk_employeeterritories_territories; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY employeeterritories
+    ADD CONSTRAINT fk_employeeterritories_territories FOREIGN KEY (territoryid) REFERENCES territories;
+
+
+--
+-- Name: fk_employeeterritories_employees; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY employeeterritories
+    ADD CONSTRAINT fk_employeeterritories_employees FOREIGN KEY (employeeid) REFERENCES employees;
+
+
+--
+-- Name: fk_customercustomerdemo_customerdemographics; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY customercustomerdemo
+    ADD CONSTRAINT fk_customercustomerdemo_customerdemographics FOREIGN KEY (customertypeid) REFERENCES customerdemographics;
+
+
+--
+-- Name: fk_customercustomerdemo_customers; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY customercustomerdemo
+    ADD CONSTRAINT fk_customercustomerdemo_customers FOREIGN KEY (customerid) REFERENCES customers;
+
+
+--
+-- Name: fk_employees_employees; Type: Constraint; Schema: -; Owner: -
+--
+
+ALTER TABLE ONLY employees
+    ADD CONSTRAINT fk_employees_employees FOREIGN KEY (reportsto) REFERENCES employees;
+
+    
 --
 -- PostgreSQL database dump complete
 --
