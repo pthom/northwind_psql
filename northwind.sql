@@ -22,9 +22,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
-
-SET search_path = northwind, pg_catalog;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -3912,16 +3909,6 @@ ALTER TABLE ONLY employees
     ADD CONSTRAINT fk_employees_employees FOREIGN KEY (reportsto) REFERENCES employees;
 
     
---
--- Name: public; Type: ACL; Schema: -; Owner: -
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA northwind TO postgres;
-GRANT ALL ON SCHEMA northwind TO PUBLIC;
-
-
 --
 -- PostgreSQL database dump complete
 --
