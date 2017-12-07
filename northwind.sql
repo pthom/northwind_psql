@@ -3806,6 +3806,14 @@ ALTER TABLE ONLY territories
 
 
 --
+-- Name: pk_usstates; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY usstates
+    ADD CONSTRAINT pk_usstates PRIMARY KEY (stateid);
+
+
+--
 -- Name: fk_orders_customers; Type: Constraint; Schema: -; Owner: -
 --
 
