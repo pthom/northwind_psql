@@ -1,7 +1,7 @@
 #!/bin/bash
 
-dropdb northwind
-dropuser northwind_user
+dropdb --if-exists northwind
+dropuser --if-exists northwind_user
 
 createdb northwind
 psql northwind < northwind.sql
