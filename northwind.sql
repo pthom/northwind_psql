@@ -3798,8 +3798,8 @@ ALTER TABLE ONLY territories
 -- Name: pk_usstates; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY usstates
-    ADD CONSTRAINT pk_usstates PRIMARY KEY (stateid);
+ALTER TABLE ONLY us_states
+    ADD CONSTRAINT pk_usstates PRIMARY KEY (state_id);
 
 
 --
