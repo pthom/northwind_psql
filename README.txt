@@ -42,6 +42,12 @@ SELECT LENGTH(company_name), contact_name
 FROM suppliers
 WHERE LENGTH(company_name) > 20
 
+find all customers that include the word 'MARKET' in the contact title. Should return 19 records.
+SELECT * 
+FROM customers
+WHERE UPPER(contact_title) LIKE '%MARKET%'
+
+
 
 
 
