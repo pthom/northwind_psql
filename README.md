@@ -63,4 +63,4 @@ docker-compose down
 ```
 
 Your modifications will be persisted in the `dabata/` local folder, and can be retrieved
-once you restat "docker compose".
+once you restart `docker compose up`.
