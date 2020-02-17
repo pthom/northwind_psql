@@ -56,7 +56,7 @@ postgres=# select * from us_states;
 
 #### 3. stop docker-compose
 
-Stop the server that was launched by `docker compuse up` via `Ctrl-C`, then remove the containers via:
+Stop the server that was launched by `docker compose up` via `Ctrl-C`, then remove the containers via:
 
 ```bash
 docker-compose down
