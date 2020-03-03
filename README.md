@@ -22,6 +22,13 @@ Use the provided sql file `nortwhind.sql` in order to populate your database.
 
 #### 1. run docker-compose
 
+On Windows you need to do this:
+```
+docker volume create --name northwind-pg-data -d local
+```
+
+Then just do this:
+
 ```bash
 > docker-compose up
 
