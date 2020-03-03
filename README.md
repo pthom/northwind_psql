@@ -43,7 +43,9 @@ db_1  | 2019-11-28 21:07:14.364 UTC [1] LOG:  listening on Unix socket "/var/run
 db_1  | 2019-11-28 21:07:14.474 UTC [1] LOG:  database system is ready to accept connections
 ```
 
-#### 2. run psql client in the docker-compose container
+#### 2. Connect to the database and interact!
+
+##### Option 1: Run psql client in the docker-compose container
 
 Open another terminal window, and type:
 
@@ -60,6 +62,13 @@ postgres=# select * from us_states;
         2 | Alaska               | AK         | north
         ...
 ````
+
+##### Option 2: Connect via application or other means
+Server: localhost
+Port: 5432
+Database: northwind
+User: northwind_user
+
 
 #### 3. stop docker-compose
 
