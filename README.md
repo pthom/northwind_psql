@@ -22,16 +22,31 @@ Use the provided sql file `nortwhind.sql` in order to populate your database.
 
 #### 1. run docker-compose
 
-On Windows you need to do this:
+**NOTE:** On Windows you need to do this first:
 ```
 docker volume create --name northwind-pg-data -d local
 ```
+If you're using Windows, you also need to make sure the volume being referenced is the one you just created.  The `docker-compose-windows.yml` file does this AND also exposes port 5432 so that external processes can access the database as well.
+
 
 Then just do this:
 
-```bash
+```bash 
 > docker-compose up
+```
 
+**NOTE:** Simply doing `docker-compose up` will enable you to interact as shown below (with another Docker process), but if you want to interact from a non-Docker process on the host (like VS Code, or some application that you would like to write outside of Docker), you should expose port 5432
+or another one of your choosing as shown in `docker-compose-windows.yml`.  
+
+To use the `docker-windows.yml` version which *exposes port 5432 and uses the volume created above*, just do this:
+
+```
+docker-compose -f .\docker-compose-windows.yml up
+```
+
+After running either of the above `docker-compose` commands, you should see some output in the terminal:
+
+```
 ...
 ... Lots of messages...
 ...
@@ -64,10 +79,10 @@ postgres=# select * from us_states;
 ````
 
 ##### Option 2: Connect via application or other means
-Server: localhost
-Port: 5432
-Database: northwind
-User: northwind_user
+* Server: localhost
+* Port: 5432
+* Database: northwind
+* User: northwind_user
 
 
 #### 3. stop docker-compose
