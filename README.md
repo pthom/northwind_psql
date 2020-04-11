@@ -41,7 +41,7 @@ db_1  | 2019-11-28 21:07:14.474 UTC [1] LOG:  database system is ready to accept
 Open another terminal window, and type:
 
 ````bash
-> docker-compose exec db psql -U northwind_user -d northwind
+> docker-compose exec db psql -U postgres -p postgres -d northwind
 
 psql (10.5 (Debian 10.5-1.pgdg90+1))
 Type "help" for help.
@@ -54,13 +54,30 @@ postgres=# select * from us_states;
         ...
 ````
 
-#### 3. stop docker-compose
+#### 3. pgadmin
+
+You can access pgAdmin4 for easy database management at:
+```bash
+http://localhost:8080
+
+username: postgres
+password: postgres
+```
+
+Your modifications will be persisted in the `dabata/` local folder, and can be retrieved
+once you restart `docker compose up`.
+
+#### 4. stop docker-compose
 
 Stop the server that was launched by `docker compose up` via `Ctrl-C`, then remove the containers via:
 
 ```bash
 docker-compose down
 ```
+#### 5. files & persistence
 
-Your modifications will be persisted in the `dabata/` local folder, and can be retrieved
+Your modifications will be persisted in the `dabata` docker volume, and can be retrieved
 once you restart `docker compose up`.
+
+If you need to upload any files into your db container, just copy and paste them to the files folder. They will be
+available at the `/files` path inside the container.
