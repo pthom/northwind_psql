@@ -29,7 +29,6 @@ services:
     networks:
       - main
 
-
 volumes:
   postgresql:
     driver: local
