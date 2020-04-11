@@ -2,11 +2,39 @@ version: '3'
 
 services:
   db:
+    ports:
+      - 5432:5432
     image: postgres:12
     environment:
       POSTGRES_DB: northwind
-      POSTGRES_USER: northwind_user
-      POSTGRES_PASSWORD: thewindisblowing
+      POSTGRES_USER: admin@admin.com
+      POSTGRES_PASSWORD: admin@admin.com
     volumes:
-      - ./dbdata:/var/lib/postgresql/data
+      - dbdata:/var/lib/postgresql/data
       - ./northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
+      - ./files:/files
+      - postgresql:/usr/lib/postgresql
+    networks:
+      - main
+
+  pgadmin:
+    ports:
+      - 8080:80
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin@admin.com
+    volumes:
+      - postgresql:/usr/lib/postgresql
+    networks:
+      - main
+
+
+volumes:
+  postgresql:
+    driver: local
+  dbdata:
+    driver: local
+
+networks:
+  main:
