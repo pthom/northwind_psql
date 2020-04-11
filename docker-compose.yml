@@ -25,6 +25,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin@admin.com
     volumes:
+#      To upload bigger files copy them to files folder and than move them to /var/lib/pgadmin/storage for restore. The mapping doesn't work.
       - postgresql:/usr/lib/postgresql
       - ./files:/files
     networks:
