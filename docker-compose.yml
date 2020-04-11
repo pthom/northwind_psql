@@ -26,6 +26,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin@admin.com
     volumes:
       - postgresql:/usr/lib/postgresql
+      - ./files:/files
     networks:
       - main
 
