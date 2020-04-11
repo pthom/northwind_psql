@@ -7,8 +7,8 @@ services:
     image: postgres:12
     environment:
       POSTGRES_DB: northwind
-      POSTGRES_USER: admin@admin.com
-      POSTGRES_PASSWORD: admin@admin.com
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
       - dbdata:/var/lib/postgresql/data
       - ./northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
@@ -22,8 +22,8 @@ services:
       - 8080:80
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin@admin.com
+      PGADMIN_DEFAULT_EMAIL: postgres
+      PGADMIN_DEFAULT_PASSWORD: postgres
     volumes:
 #      To upload bigger files copy them to files folder and than move them to /var/lib/pgadmin/storage for restore. The mapping doesn't work.
       - postgresql:/usr/lib/postgresql
