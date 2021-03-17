@@ -1,7 +1,6 @@
 # Northwind database for Postgres
 
-A simple sql script that will populate a database with the famous northwind example,
-adapted for postgres.
+A simple sql script that will populate a database with the famous northwind example, adapted for postgres.
 
 <img src=ER.png />
 
@@ -62,5 +61,5 @@ Stop the server that was launched by `docker compose up` via `Ctrl-C`, then remo
 docker-compose down
 ```
 
-Your modifications will be persisted in the `dabata/` local folder, and can be retrieved
+Your modifications will be persisted in the `dbdata/` local folder, and can be retrieved
 once you restart `docker compose up`.
