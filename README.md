@@ -57,7 +57,7 @@ Alternatively, you can launch bash, then psql:
 ````bash
 docker-compose exec db /bin/bash
 
-# You are now connected to the "db" docker container
+# You are now inside the "db" docker container
 psql -U postgres northwind
 ````
 
@@ -92,7 +92,7 @@ Stop the server that was launched by `docker compose up` via `Ctrl-C`, then remo
 docker-compose down
 ```
 
-#### 5. files & persistence
+#### 5. Files & persistence
 
 Your modifications to the postgres database(s)will be persisted in the `postgresql_data` docker volume, and can be retrieved once you restart `docker compose up`. 
 
