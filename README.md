@@ -70,7 +70,7 @@ Add new server in PgAdmin:
 
 - Select DB - northwind
 
-#### 5. Stop docker-compose
+#### 4. Stop docker-compose
 
 Stop the server that was launched by `docker compose up` via `Ctrl-C`, then remove the containers via:
 
