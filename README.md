@@ -33,7 +33,9 @@ Creating pgadmin ... done
 Creating db      ... done
 ````
 
-#### 2. Run psql client in the docker-compose container
+#### 2. Run psql client:
+
+##### Method 1: Via the docker-compose container
 
 Open another terminal window, and type:
 
@@ -49,6 +51,23 @@ northwind=# select * from us_states;
         1 | Alabama              | AL         | south
         2 | Alaska               | AK         | north
         ...
+````
+
+Alternatively, you can launch bash, then psql:
+````bash
+docker-compose exec db /bin/bash
+
+# You are now connected to the "db" docker container
+psql -U postgres northwind
+````
+
+##### Method 2: Direct access via the port 55432
+
+The "db" docker exposes postgres on the port 55432. If you have psql on your path, you may connect to it via:
+
+````bash
+# Run this directly from your computer (this will connect to the docker db)
+psql -U postgres northwind -p 55432
 ````
 
 #### 3. Connect PgAdmin
@@ -75,6 +94,8 @@ docker-compose down
 
 #### 5. files & persistence
 
-Your modifications to the postgres database(s)will be persisted in the `dbdata` local folder, and can be retrieved once you restart `docker compose up`.
+Your modifications to the postgres database(s)will be persisted in the `postgresql_data` docker volume, and can be retrieved once you restart `docker compose up`. 
+
+If you need to delete the database data, run `docker-compose down -v` (the database will then be repopulated from scratch when running `docker-compose up`).
 
 If you need to upload any files into your db container, just copy and paste them to the `files` local folder. They will be available at the `/files` path inside the db container.
