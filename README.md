@@ -1,7 +1,7 @@
 # Northwind database for Postgres
 
 A simple sql script that will populate a database with the famous northwind example, adapted for postgres.
-Two connections PgAdmin and PyCharm/
+With using the database connection through PgAdmin.
 
 <img src=ER.png />
 
@@ -70,19 +70,6 @@ Add new server in PgAdmin:
 
 - Select DB - northwind
 
-
-#### 4. Connect PyCharm Professional Edition
-
-```bash
-docker ps (copy [container id] db)
-docker inspect [container id]
-```
-- Find "IPAddress": and copy "[172.23.0.2]"
-- Next open PyCharm - connect database
-
-<img src=Connect_Py.png />
-
-
 #### 5. Stop docker-compose
 
 Stop the server that was launched by `docker compose up` via `Ctrl-C`, then remove the containers via:
@@ -90,8 +77,4 @@ Stop the server that was launched by `docker compose up` via `Ctrl-C`, then remo
 ```bash
 docker-compose down
 ```
-
-Your modifications will be persisted in the `dbdata/` local folder, and can be retrieved
-once you restart `docker compose up`.
-
 
