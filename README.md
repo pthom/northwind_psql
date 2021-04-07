@@ -1,7 +1,6 @@
 # Northwind database for Postgres
 
 A simple sql script that will populate a database with the famous northwind example, adapted for postgres.
-With using the database connection through PgAdmin.
 
 <img src=ER.png />
 
@@ -22,7 +21,7 @@ Use the provided sql file `nortwhind.sql` in order to populate your database.
 
 #### 1. Run docker-compose
 
-```bash
+````bash
 > docker-compose up
 ...
 ... Lots of messages...
@@ -32,14 +31,14 @@ Creating volume "northwind_psql_db" with default driver
 Creating volume "northwind_psql_pgadmin" with default driver
 Creating pgadmin ... done
 Creating db      ... done
-```
+````
 
 #### 2. Run psql client in the docker-compose container
 
 Open another terminal window, and type:
 
 ````bash
-> docker-compose exec db psql -U northwind_user -d northwind
+> docker-compose exec db psql -U postgres -d northwind
 
 psql (13.2 (Debian 13.2-1.pgdg100+1))
 Type "help" for help.
@@ -54,21 +53,17 @@ northwind=# select * from us_states;
 
 #### 3. Connect PgAdmin
 
-Access to PgAdmin:
+Access to PgAdmin at the url: http://localhost:5050
 
-- URL: http://localhost:5050
-- Username: pgadmin4@pgadmin.org (as a default)
-- Password: admin (as a default)
+Add a new server in PgAdmin:
+- General Tab:
+  - Name = db
+- Connection Tab:
+  - Host name: db
+  - Username: postgres
+  - Password: postgres
 
-Add new server in PgAdmin:
-
-- Create - Server
- - Name: db
- - Host name/address: db
- - Username: northwind_user
- - Password: thewindisblowing
-
-- Select DB - northwind
+Then, select database "northwind".
 
 #### 4. Stop docker-compose
 
@@ -78,3 +73,8 @@ Stop the server that was launched by `docker compose up` via `Ctrl-C`, then remo
 docker-compose down
 ```
 
+#### 5. files & persistence
+
+Your modifications to the postgres database(s)will be persisted in the `dbdata` local folder, and can be retrieved once you restart `docker compose up`.
+
+If you need to upload any files into your db container, just copy and paste them to the `files` local folder. They will be available at the `/files` path inside the db container.
