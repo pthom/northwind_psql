@@ -3,7 +3,7 @@ version: '3'
 services:
   db:
     container_name: db
-    image: postgres:13
+    image: postgres:latest
     environment:
       POSTGRES_DB: northwind
       POSTGRES_USER: postgres
@@ -29,6 +29,7 @@ services:
     volumes:
       - postgresql_bin:/usr/lib/postgresql
       - pgadmin_root_prefs:/root/.pgadmin
+      - ./files:/files
     ports:
       - 5050:5050
     networks:
