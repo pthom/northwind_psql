@@ -29,6 +29,7 @@ services:
     volumes:
       - postgresql_bin:/usr/lib/postgresql
       - pgadmin_root_prefs:/root/.pgadmin
+      - pgadmin_working_dir:/var/lib/pgadmin
       - ./files:/files
     ports:
       - 5050:5050
@@ -41,6 +42,8 @@ networks:
 
 volumes:
   pgadmin_root_prefs:
+    driver: local
+  pgadmin_working_dir:
     driver: local
   postgresql_data:
     driver: local
