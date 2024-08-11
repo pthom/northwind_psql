@@ -14,7 +14,7 @@ services:
       - ./northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
       - ./files:/files
     ports:
-      - 55432:5432
+      - 127.0.0.1:55432:5432
     networks:
       - db
 
@@ -32,7 +32,7 @@ services:
       - pgadmin_working_dir:/var/lib/pgadmin
       - ./files:/files
     ports:
-      - 5050:5050
+      - 127.0.0.1:5050:5050
     networks:
       - db
 
