@@ -1,0 +1,26 @@
+name: Deploy to server
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Deploy to VPS
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.IP_ADDRESS }} << 'EOF'
+          cd ~/deploy/northwind
+          git pull origin master || git clone https://github.com/marat-karimov/northwind_psql.git .
+          docker-compose down
+          docker-compose up -d
+        EOF
