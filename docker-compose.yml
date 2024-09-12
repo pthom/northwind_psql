@@ -12,7 +12,7 @@ services:
       - ./northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
       - ./files:/files
     ports:
-      - 55432:5432
+      - 5432:5432
     networks:
       - db
 
