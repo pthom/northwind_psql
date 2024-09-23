@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   northwindpsql:
-    image: northwindpsql1
+    image: northwindpsql
     build:
       context: .
       dockerfile: ./Dockerfile

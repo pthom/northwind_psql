@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "northwind_psql @ f6ef03f",
+			"uri": "gitlens://7b22726566223a2266366566303366313865356566646561326531633138323632343934306631333163356530336262222c227265706f50617468223a22633a2f55736572732f4a756c69616e537472616e67652f6e6f72746877696e645f7073716c227d/c:/Users/JulianStrange/northwind_psql?{\"ref\":\"f6ef03f\"}"
+		}
+	],
+  "settings": {
+    "git.ignoreLimitWarning": true,
+    "sqltools.connections": [
+      {
+        "pgOptions": {
+          "statement_timeout": 0,
+          "query_timeout": 0,
+          "connectionTimeoutMillis": 0,
+          "idleTimeoutMillis": 0
+        },
+        "driver": "CloudSQL-PostgreSQL",
+        "name": "northwind_psql",
+        "instanceConnectionName": "northwind_psql:C:\\Users\\JulianStrange\\",
+        "database": "northwind_psql",
+        "username": "postgres"
+      }
+    ]
+  }
+}
