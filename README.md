@@ -33,6 +33,15 @@ Creating pgadmin ... done
 Creating db      ... done
 ````
 
+if docker-compose fails with Error: "unable to get image 'dpage/pgadmin4': request returned 500 Internal Server Error for API route and version"
+```
+docker info
+docker login
+docker pull postgres:13
+docker pull dpage/pgadmin4:latest
+docker compose up
+```
+
 #### 2. Run psql client:
 
 ##### Method 1: Via the docker-compose container
